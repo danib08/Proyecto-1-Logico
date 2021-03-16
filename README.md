@@ -1,1 +1,1 @@
-# Proyecto-1-Dise-o-L-gico
+# Proyecto 1 Diseño Lógico
