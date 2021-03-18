@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 from NRZI import NRZI
 
 font = "Verdana"
-window = tk.Tk()  # Main window
+root = tk.Tk()  # Main window
+root.resizable(False, False)
 
 def click_binario():  # Makes sure the input is a 12 bit binary number
     try:
@@ -17,35 +19,45 @@ def click_binario():  # Makes sure the input is a 12 bit binary number
         if len(user_input) == 12 and isinstance(number, int) and is_binary:
             entry.delete(0, 'end')
             deci = int(user_input, 2)
-            hexa = hex(deci)
-            octa = oct(deci)
-            # messagebox.showinfo("Correcto", "Decimal: %s, Hexadecimal: %s, Octal: %s" % (deci, hexa, octa))
+            hexa = hex(deci)[2:].upper()
+            octa = oct(deci)[2:].upper()
+
+            table.delete(*table.get_children())
+            table.insert("", 0, values=(user_input, deci, hexa, octa))
+            table.pack()
+
             draw_nrzi = NRZI(user_input, nrzi_canvas)
             draw_nrzi.draw()
         else:
             messagebox.showerror("Error", "El número debe ser binario y de 12 dígitos")
     except ValueError:
-        pass
         messagebox.showerror("Error", "Ingrese un número válido")
 
+# Create frames and canvas
+conversion_frame = tk.Frame(master=root, bg="steelblue1", width=500, height=200)
+nrzi_frame = tk.Frame(master=root, bg="steelblue1", width=800, height=400)
+nrzi_canvas = tk.Canvas(master=nrzi_frame, bg="steelblue1", width=800, height=260, highlightthickness=0)
+
 # Create widgets
-top_frame = tk.Frame(master=window, bg="skyblue1", width=500, height=200)
-nrzi_frame = tk.Frame(master=window, bg="black", width=800, height=400)
-nrzi_canvas = tk.Canvas(master=nrzi_frame, bg="plum1", width=800, height=260, highlightthickness=0)
+title_label = tk.Label(master=conversion_frame, text="Proyecto 1", bg="steelblue1", font=(font, 12))
+instr_label = tk.Label(master=conversion_frame, text="Ingrese un número binario de 12 dígitos", bg="steelblue1", font=(font, 10))
+button = tk.Button(master=conversion_frame, text="Hecho", command=click_binario, font=(font, 10))
+entry = tk.Entry(master=conversion_frame)
 
-title_label = tk.Label(master=top_frame, text="Proyecto 1", bg="skyblue1", font=(font, 12))
-instr_label = tk.Label(master=top_frame, text="Ingrese un número binario de 12 dígitos", bg="skyblue1", font=(font, 10))
-button = tk.Button(master=top_frame, text="Hecho", command=click_binario)
-
-entry = tk.Entry(master=top_frame)
+# Create table
+table = ttk.Treeview(conversion_frame, columns=("#1", "#2", "#3", "#4"))
+table.heading("#1", text="Número binario insertado")
+table.heading("#2", text="Decimal")
+table.heading("#3", text="Octal")
+table.heading("#4", text="Hexadecimal")
 
 # Place widgets
-top_frame.pack(fill=tk.BOTH, expand=True)
+conversion_frame.pack(fill=tk.BOTH, expand=True)
 nrzi_frame.pack(fill=tk.BOTH, expand=True)
 title_label.pack()
 instr_label.pack()
 nrzi_canvas.pack()
-button.pack()
+button.pack(pady=5)
 entry.pack()
 
-window.mainloop()
+root.mainloop()
