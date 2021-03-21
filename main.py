@@ -40,16 +40,24 @@ nrzi_canvas = tk.Canvas(master=nrzi_frame, bg="steelblue1", width=800, height=26
 
 # Create widgets
 title_label = tk.Label(master=conversion_frame, text="Proyecto 1", bg="steelblue1", font=(font, 12))
-instr_label = tk.Label(master=conversion_frame, text="Ingrese un número binario de 12 dígitos", bg="steelblue1", font=(font, 10))
+instr_label = tk.Label(master=conversion_frame, text="Ingrese un número binario de 12 dígitos:", bg="steelblue1", font=(font, 10))
+paridad_label = tk.Label(master=conversion_frame, text="Elija la paridad:", bg="steelblue1", font=(font, 10))
 button = tk.Button(master=conversion_frame, text="Hecho", command=click_binario, font=(font, 10))
 entry = tk.Entry(master=conversion_frame)
+radio_group = tk.IntVar()
+radio1 = tk.Radiobutton(conversion_frame, text="Par", variable=radio_group, value=0, bg="steelblue1", activebackground="steelblue1")
+radio2 = tk.Radiobutton(conversion_frame, text="Impar", variable=radio_group, value=1, bg="steelblue1", activebackground="steelblue1")
 
 # Create table
-table = ttk.Treeview(conversion_frame, columns=("#1", "#2", "#3", "#4"))
-table.heading("#1", text="Número binario insertado")
-table.heading("#2", text="Decimal")
-table.heading("#3", text="Octal")
-table.heading("#4", text="Hexadecimal")
+table = ttk.Treeview(conversion_frame, columns=("1", "2", "3", "4"), height=1, show="headings")
+table.heading("1", text="Número binario insertado")
+table.heading("2", text="Decimal")
+table.heading("3", text="Octal")
+table.heading("4", text="Hexadecimal")
+table.column("1", minwidth=50, width=160, anchor="center")
+table.column("2", minwidth=50, width=60, anchor="center")
+table.column("3", minwidth=50, width=50, anchor="center")
+table.column("4", minwidth=50, width=80, anchor="center")
 
 # Place widgets
 conversion_frame.pack(fill=tk.BOTH, expand=True)
@@ -57,7 +65,10 @@ nrzi_frame.pack(fill=tk.BOTH, expand=True)
 title_label.pack()
 instr_label.pack()
 nrzi_canvas.pack()
-button.pack(pady=5)
-entry.pack()
+entry.pack(pady=1)
+paridad_label.pack()
+radio1.pack()
+radio2.pack()
+button.pack(pady=2)
 
 root.mainloop()
