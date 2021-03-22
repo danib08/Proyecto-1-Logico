@@ -2,9 +2,11 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 from NRZI import NRZI
+from hamming import Hamming
 
 font = "Verdana"
 root = tk.Tk()  # Main window
+root.title("Proyecto 1")
 root.resizable(False, False)
 
 def click_binario():  # Makes sure the input is a 12 bit binary number
@@ -28,6 +30,9 @@ def click_binario():  # Makes sure the input is a 12 bit binary number
 
             draw_nrzi = NRZI(user_input, nrzi_canvas)
             draw_nrzi.draw()
+
+            Hamming(root, user_input, 0, "1")
+
         else:
             messagebox.showerror("Error", "El número debe ser binario y de 12 dígitos")
     except ValueError:
@@ -35,7 +40,7 @@ def click_binario():  # Makes sure the input is a 12 bit binary number
 
 # Create frames and canvas
 conversion_frame = tk.Frame(master=root, bg="steelblue1", width=500, height=200)
-nrzi_frame = tk.Frame(master=root, bg="steelblue1", width=800, height=400)
+nrzi_frame = tk.Frame(master=root, bg="steelblue1", width=500, height=400)
 nrzi_canvas = tk.Canvas(master=nrzi_frame, bg="steelblue1", width=800, height=260, highlightthickness=0)
 
 # Create widgets
@@ -47,6 +52,9 @@ entry = tk.Entry(master=conversion_frame)
 radio_group = tk.IntVar()
 radio1 = tk.Radiobutton(conversion_frame, text="Par", variable=radio_group, value=0, bg="steelblue1", activebackground="steelblue1")
 radio2 = tk.Radiobutton(conversion_frame, text="Impar", variable=radio_group, value=1, bg="steelblue1", activebackground="steelblue1")
+
+# # Hamming class
+# hamming = Hamming(root)
 
 # Create table
 table = ttk.Treeview(conversion_frame, columns=("1", "2", "3", "4"), height=1, show="headings")
