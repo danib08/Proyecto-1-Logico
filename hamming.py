@@ -93,7 +93,7 @@ class Hamming:
         self.tabla.column("#17", width=30)
 
         self.tabla.heading("#0", text=" ")
-        self.tabla.heading("#1", text="self.p1")
+        self.tabla.heading("#1", text="p1")
         self.tabla.heading("#2", text="p2")
         self.tabla.heading("#3", text="d1")
         self.tabla.heading("#4", text="p3")
@@ -115,7 +115,7 @@ class Hamming:
             '', self.lista[1], self.lista[2], self.lista[3], '', self.lista[4], self.lista[5], self.lista[6],
             self.lista[7], self.lista[8], self.lista[9], self.lista[10], '', self.lista[11]))
 
-        self.tabla.insert(parent='', index='end', text="self.p1", values=(self.p1, "", self.lista[0], "", self.lista[1], "",
+        self.tabla.insert(parent='', index='end', text="p1", values=(self.p1, "", self.lista[0], "", self.lista[1], "",
             self.lista[3], "", self.lista[4], "", self.lista[6], "", self.lista[8], "", self.lista[10], "", self.lista[11]))
 
         self.tabla.insert(parent='', index='end', text="p2", values=("", self.p2, self.lista[0], "", "", self.lista[2],
