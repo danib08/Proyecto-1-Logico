@@ -19,7 +19,7 @@ def click_binario():  # Makes sure the input is a 12 bit binary number
                 is_binary = False
                 break
         if len(user_input) == 12 and isinstance(number, int) and is_binary:
-            entry.delete(0, 'end')
+            # entry.delete(0, 'end')
             deci = int(user_input, 2)
             hexa = hex(deci)[2:].upper()
             octa = oct(deci)[2:].upper()
