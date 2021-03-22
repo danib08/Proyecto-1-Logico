@@ -4,10 +4,11 @@ import tkinter as tk
 class Hamming:
     def __init__(self, root, cod, paridad, digito):
         self.toplevel = tk.Toplevel(root)
+        self.toplevel.title("Código de Hamming")
         self.tabla = ttk.Treeview(self.toplevel)
         self.lista = list(cod)
         self.digito = digito
-        self.paridad = 0   # 0 si par y 1 si impar
+        self.paridad = paridad  # True si par y False si impar
         self.nuevocod = []
 
         self.p1 = "1"
@@ -34,7 +35,7 @@ class Hamming:
                  int(self.lista[8]) ^ int(self.lista[9]) ^ int(self.lista[10]))
         self.p5 = str(int(self.lista[11]))
 
-        if self.paridad == 1:
+        if not self.paridad:
             if self.p1 == "1":
                 self.p1 = "0"
             else:
